@@ -101,16 +101,16 @@
          //  Event on change select province:start
          $('#select_pelabuhan1').change(function() {
             //clear select
-            $("#select_pelabuhan2").empty();
+            //$("#select_pelabuhan2").empty();
             $("#select_jadwal").empty();
             //set id
             let asalID = $(this).val();
             if (asalID) {
-               
+
                $('#select_jadwal').select2({
                   allowClear: true,
                   ajax: {
-                     url: "{{ route('jadwalkapal.select') }}?asalID=" + asalID + "&&tujuanID="+tujuanID,
+                     url: "{{ route('jadwalkapal.select') }}?asalID=" + asalID,
                      dataType: 'json',
                      delay: 250,
 
