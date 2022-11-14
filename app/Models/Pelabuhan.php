@@ -16,4 +16,9 @@ class Pelabuhan extends Model
         return $this->hasMany(Rute::class);
     }
 
+    public function trip()
+    {
+        return $this->hasOne(Trip::class);
+    }
+
 }

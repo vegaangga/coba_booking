@@ -56,6 +56,71 @@ class PelabuhanTableSeeder extends Seeder
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ],
+
+            [
+                'kode_pelabuhan' => "A",
+                'nama_pelabuhan' => 'Pelabuhan A',
+                'alamat' => '-',
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s'),
+            ],
+            [
+                'kode_pelabuhan' => "B",
+                'nama_pelabuhan' => 'Pelabuhan B',
+                'alamat' => '-',
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s'),
+            ],
+            [
+                'kode_pelabuhan' => "C",
+                'nama_pelabuhan' => 'Pelabuhan C',
+                'alamat' => '-',
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s'),
+            ],
+            [
+                'kode_pelabuhan' => "D",
+                'nama_pelabuhan' => 'Pelabuhan D',
+                'alamat' => '-',
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s'),
+            ],
+            [
+                'kode_pelabuhan' => "E",
+                'nama_pelabuhan' => 'Pelabuhan E',
+                'alamat' => '-',
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s'),
+            ],
+            [
+                'kode_pelabuhan' => "F",
+                'nama_pelabuhan' => 'Pelabuhan F',
+                'alamat' => '-',
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s'),
+            ],
+            [
+                'kode_pelabuhan' => "G",
+                'nama_pelabuhan' => 'Pelabuhan G',
+                'alamat' => '-',
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s'),
+            ],
+            [
+                'kode_pelabuhan' => "H",
+                'nama_pelabuhan' => 'Pelabuhan H',
+                'alamat' => '-',
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s'),
+            ],
+            [
+                'kode_pelabuhan' => "I",
+                'nama_pelabuhan' => 'Pelabuhan I',
+                'alamat' => '-',
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s'),
+            ],
+
         ]);
     }
 }

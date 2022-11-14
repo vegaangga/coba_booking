@@ -5,25 +5,29 @@ namespace App\Http\Controllers;
 use App\Models\City;
 use App\Models\Booking;
 use App\Models\User;
+use App\Models\Trip;
+use App\Models\Rute;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class BookingController extends Controller
+class TripController extends Controller
 {
     public function index(Request $request)
     {
-        //$booking = Booking::with(['user', 'jadwalkapal', 'barang', 'container'])->first();
-        //$booking = Booking::all();
-        $booking = DB::table('rute')->get();
-        $jadwal = DB::table('jadwal_kapal')->get();
-        // return view('booking.index', [
-        //     'booking' => $booking->paginate(5),
-        // ]);
-        //dd($booking);
+        //$trip = Trip::with(['pelabuhan'])->first();
+        $trip = trip::all();
+        //$booking = DB::table('booking')->get();
+        //$id=$request->id;
+        //$rute = Rute::where('id_trip',$id);
+        $rute = Rute::all();
         return view('booking.index', [
-                'booking' => $booking,
-
+            'trip' => $trip,
+            'rute' => $rute
         ]);
+        //dd($booking);
+        // return view('booking.index', [
+        //         'trip' => $trip,
+        // ]);
     }
 
     public function create()

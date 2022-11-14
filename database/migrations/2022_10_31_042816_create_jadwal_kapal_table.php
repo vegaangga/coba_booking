@@ -15,14 +15,14 @@ return new class extends Migration
     {
         Schema::create('jadwal_kapal', function (Blueprint $table) {
             $table->increments('id');
-            $table->char('id_kapal',10);
+            $table->integer('id_kapal')->unsigned();
             $table->integer('id_rute')->unsigned();
             $table->dateTime('ETA')->nullable();
             $table->dateTime('ETD')->nullable();
             $table->timestamps();
 
             $table->foreign('id_kapal')
-            ->references('kode_kapal')
+            ->references('id')
             ->on('kapal')
             ->onDelete('cascade');
 

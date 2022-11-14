@@ -67,7 +67,7 @@
                   return {
                      results: $.map(data, function(item) {
                         return {
-                           text: item.kode_pelabuhan+ '-' +item.nama_pelabuhan,
+                           text: item.kode_pelabuhan + '-' +item.nama_pelabuhan,
                            id: item.kode_pelabuhan
                         }
                      })
@@ -76,82 +76,55 @@
             }
          });
 
-         $('#select_pelabuhan2').select2({
-            allowClear: true,
-            //$('#select_pelabuhan2').empty();
-            ajax: {
-               url: "{{ route('pelabuhan2.select') }}",
-               dataType: 'json',
-               delay: 250,
-               processResults: function(data) {
-                  return {
-                     results: $.map(data, function(item) {
-                        return {
-                           text: item.kode_pelabuhan+ '-' +item.nama_pelabuhan,
-                           id: item.kode_pelabuhan
-                        }
-                     })
-                  };
-               }
-            }
-         });
-
-         //  select province:end
-
-         //  Event on change select province:start
          $('#select_pelabuhan1').change(function() {
             //clear select
-            //$("#select_pelabuhan2").empty();
+            $("#select_pelabuhan2").empty();
             $("#select_jadwal").empty();
+
             //set id
-            let asalID = $(this).val();
+            let asalID = $('#select_pelabuhan1').val();
             if (asalID) {
-
-               $('#select_jadwal').select2({
+               $('#select_pelabuhan2').select2({
                   allowClear: true,
                   ajax: {
-                     url: "{{ route('jadwalkapal.select') }}?asalID=" + asalID,
+                     url: "{{ route('pelabuhan2.select') }}?asalID="+asalID,
                      dataType: 'json',
                      delay: 250,
-
                      processResults: function(data) {
                         return {
                            results: $.map(data, function(item) {
                               return {
-                                 text: item.id_kapal+' | '+item.nama_kapal+' | '+ 'ETA: ' + item.eta,
-                                 id: item.id
+                                 text: item.kode_pelabuhan+"-"+item.nama_pelabuhan,
+                                 id: item.kode_pelabuhan
                               }
                            })
                         };
                      }
                   }
                });
-            } else {
-               $("#select_district").empty();
-               $("#select_village").empty();
             }
          });
-         //  Event on change select province:end
 
-         //  Event on change select regency:start
-         $('#select_regency').change(function() {
+         $('#select_pelabuhan2').change(function() {
             //clear select
-            $("#select_district").empty();
-            $("#select_village").empty();
+            $("#select_jadwal").empty();
+
             //set id
-            let regencyID = $(this).val();
-            if (regencyID) {
-               $('#select_district').select2({
+            let tujuanID = $('#select_pelabuhan2').val();
+            let asalID = $('#select_pelabuhan1').val();
+            if (tujuanID) {
+               $('#select_jadwal').select2({
+                  //var yay = "asalID='"+ asalID+"'&tujuanID='"+tujuanID+"'"
                   allowClear: true,
                   ajax: {
-                     url: "{{ route('districts.select') }}?regencyID=" + regencyID,
+                     url: "{{ route('jadwalkapal.select') }}?asalID="+asalID+"&"+"tujuanID="+tujuanID,
                      dataType: 'json',
                      delay: 250,
                      processResults: function(data) {
                         return {
                            results: $.map(data, function(item) {
                               return {
-                                 text: item.name,
+                                 text: item.id_trip + +"|"+ "ETA: " + item.ETA +"|" +"ETD: " +item.ETD,
                                  id: item.id
                               }
                            })
@@ -159,40 +132,126 @@
                      }
                   }
                });
-            } else {
-               $("#select_district").empty();
-               $("#select_village").empty();
             }
          });
+
+
+         // $('#select_pelabuhan2').select2({
+         //    allowClear: true,
+         //    ajax: {
+         //       url: "{{ route('pelabuhan.select') }}",
+         //       dataType: 'json',
+         //       delay: 250,
+         //       processResults: function(data) {
+         //          return {
+         //             results: $.map(data, function(item) {
+         //                return {
+         //                   text: item.kode_pelabuhan + '-' +item.nama_pelabuhan,
+         //                   id: item.kode_pelabuhan
+         //                }
+         //             })
+         //          };
+         //       }
+         //    }
+         // });
+
+         // $('select_pelabuhan2').change(function(){
+         //    $("#select_jadwal").empty();
+         //    // $('#select_pelabuhan2').change(function(){
+         //       let asalID = $('#select_pelabuhan1').val();
+         //       let tujuanID = $('#select_pelabuhan2').val();
+
+         //       if (asalID) {
+         //       $('#select_pelabuhan2').select2({
+         //          allowClear: true,
+         //          ajax: {
+         //             url: "{{ route('pelabuhan2.select') }}?asalID=" + asalID,
+         //             dataType: 'json',
+         //             delay: 250,
+         //             processResults: function(data) {
+         //                return {
+         //                   results: $.map(data, function(item) {
+         //                      return {
+         //                         text: item.kode_pelabuhan + '-' +item.nama_pelabuhan,
+         //                         id: item.id
+         //                      }
+         //                   })
+         //                };
+         //             }
+         //          }
+         //       });
+
+         //    } else {
+         //       $('#select_pelabuhan2').empty();
+         //       $("#select_jadwal").empty();
+         //    }
+         //    // })
+         // })
+
+         // //  Event on change select province:end
+
+         // //  Event on change select regency:start
+         // $('#select_regency').change(function() {
+         //    //clear select
+         //    $("#select_district").empty();
+         //    $("#select_village").empty();
+         //    //set id
+         //    let regencyID = $(this).val();
+         //    if (regencyID) {
+         //       $('#select_district').select2({
+         //          allowClear: true,
+         //          ajax: {
+         //             url: "{{ route('districts.select') }}?regencyID=" + regencyID,
+         //             dataType: 'json',
+         //             delay: 250,
+         //             processResults: function(data) {
+         //                return {
+         //                   results: $.map(data, function(item) {
+         //                      return {
+         //                         text: item.name,
+         //                         id: item.id
+         //                      }
+         //                   })
+         //                };
+         //             }
+         //          }
+         //       });
+         //    } else {
+         //       $("#select_district").empty();
+         //       $("#select_village").empty();
+         //    }
+         //    })
+
+         // });
          //  Event on change select regency:end
 
          //  Event on change select district:Start
-         $('#select_district').change(function() {
-            //clear select
-            $("#select_village").empty();
-            //set id
-            let districtID = $(this).val();
-            if (districtID) {
-               $('#select_village').select2({
-                  allowClear: true,
-                  ajax: {
-                     url: "{{ route('villages.select') }}?districtID=" + districtID,
-                     dataType: 'json',
-                     delay: 250,
-                     processResults: function(data) {
-                        return {
-                           results: $.map(data, function(item) {
-                              return {
-                                 text: item.name,
-                                 id: item.id
-                              }
-                           })
-                        };
-                     }
-                  }
-               });
-            }
-         });
+         // $('#select_pelabuhan1').change(function() {
+         //    //clear select
+         //    $("#select_pelabuhan2").empty();
+         //    //set id
+         //    let asalID = $('#select_pelabuhan1').val();
+         //    if (asalID) {
+         //       $('#select_pelabuhan2').select2({
+         //          allowClear: true,
+         //          ajax: {
+         //             url: "{{ route('pelabuhan2.select') }}?asalID=" + asalID,
+         //             dataType: 'json',
+         //             delay: 250,
+         //             processResults: function(data) {
+         //                return {
+         //                   results: $.map(data, function(item) {
+         //                      return {
+         //                         text: item.kode_pelabuhan,
+         //                         id: item.id
+         //                      }
+         //                   })
+         //                };
+         //             }
+         //          }
+         //       });
+         //    }
+         // });
          //  Event on change select district:End
 
          // EVENT ON CLEAR

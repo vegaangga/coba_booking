@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
             // JenisBarangTableSeeder::class,
             // BarangTableSeeder::class,
             // BookingTableSeeder::class,
+            TripTableSeeder::class,
         ]);
     }
 }

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->integer('jenis_container')->unsigned();
             $table->char('kode_container');
             $table->float('kapasitas_berat');
-            $table->char('kode_kapal',10);
+            $table->integer('kode_kapal')->unsigned();
             $table->timestamps();
 
             $table->foreign('jenis_container')
@@ -27,7 +27,7 @@ return new class extends Migration
             ->onDelete('cascade');
 
             $table->foreign('kode_kapal')
-            ->references('kode_kapal')
+            ->references('id')
             ->on('kapal')
             ->onDelete('cascade');
         });

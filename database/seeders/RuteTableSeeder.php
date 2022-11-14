@@ -17,23 +17,23 @@ class RuteTableSeeder extends Seeder
     {
         DB::table('rute')->insert([
             [
-                'kode_rute' => "1",
-                'asal_pelabuhan_id' => 'IDTJP',
-                'tujuan_pelabuhan_id' => 'IDTPP',
+                'id_trip' => "1",
+                'asal_pelabuhan_id' => 'A',
+                'tujuan_pelabuhan_id' => 'B',
                 'urutan' => '1',
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ],
             [
-                'kode_rute' => "1",
-                'asal_pelabuhan_id' => 'IDTPP',
-                'tujuan_pelabuhan_id' => 'IDTJP',
+                'id_trip' => "1",
+                'asal_pelabuhan_id' => 'B',
+                'tujuan_pelabuhan_id' => 'C',
                 'urutan' => '2',
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ],
             [
-                'kode_rute' => "2",
+                'id_trip' => "2",
                 'asal_pelabuhan_id' => 'IDTJP',
                 'tujuan_pelabuhan_id' => 'IDTPP',
                 'urutan' => '1',
@@ -41,7 +41,7 @@ class RuteTableSeeder extends Seeder
                 'updated_at' => date('Y-m-d H:i:s'),
             ],
             [
-                'kode_rute' => "2",
+                'id_trip' => "2",
                 'asal_pelabuhan_id' => 'IDTPP',
                 'tujuan_pelabuhan_id' => 'IDKTG',
                 'urutan' => '2',
@@ -49,7 +49,7 @@ class RuteTableSeeder extends Seeder
                 'updated_at' => date('Y-m-d H:i:s'),
             ],
             [
-                'kode_rute' => "2",
+                'id_trip' => "2",
                 'asal_pelabuhan_id' => 'IDKTG',
                 'tujuan_pelabuhan_id' => 'IDKAT',
                 'urutan' => '3',

@@ -19,14 +19,14 @@ class KapalTableSeeder extends Seeder
             [
                 'kode_kapal' => "1-2930-DV",
                 'nama_kapal' => 'JETLINER',
-                'kapasitas' => '200',
+                'id_trip' => '1',
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ],
             [
                 'kode_kapal' => "1-2949-DV",
                 'nama_kapal' => 'LOGISTIK NUSANTARA 5',
-                'kapasitas' => '20',
+                'id-trip' => '2',
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ],
