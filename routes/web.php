@@ -30,11 +30,11 @@ Route::get('/villages', [\App\Http\Controllers\VillageController::class, 'select
 
 
 // store
-Route::get('/', [\App\Http\Controllers\TripController::class, 'index'])->name('booking.index');
-Route::get('/booking/create', [\App\Http\Controllers\BookingController::class, 'create'])->name('booking.create');
-Route::post('booking/store', [\App\Http\Controllers\BookingController::class, 'store'])->name('booking.store');
-Route::get('booking/{store}/edit', [\App\Http\Controllers\BookingController::class, 'edit'])->name('booking.edit');
-Route::put('booking/{store}', [\App\Http\Controllers\BookingController::class, 'update'])->name('booking.update');
+// Route::get('/', [\App\Http\Controllers\TripController::class, 'index'])->name('booking.index');
+// Route::get('/booking/create', [\App\Http\Controllers\BookingController::class, 'create'])->name('booking.create');
+// Route::post('booking/store', [\App\Http\Controllers\BookingController::class, 'store'])->name('booking.store');
+// Route::get('booking/{store}/edit', [\App\Http\Controllers\BookingController::class, 'edit'])->name('booking.edit');
+// Route::put('booking/{store}', [\App\Http\Controllers\BookingController::class, 'update'])->name('booking.update');
 
 // select2
 Route::get('/rute', [\App\Http\Controllers\RuteController::class, 'select'])->name('rute.select');
@@ -42,6 +42,28 @@ Route::get('/kapal', [\App\Http\Controllers\KapalController::class, 'select'])->
 Route::get('/pelabuhan', [\App\Http\Controllers\PelabuhanController::class, 'select'])->name('pelabuhan.select');
 Route::get('/pelabuhan2', [\App\Http\Controllers\PelabuhanController::class, 'select2'])->name('pelabuhan2.select');
 Route::get('/jadwal-kapal', [\App\Http\Controllers\PelabuhanController::class, 'select3'])->name('jadwalkapal.select');
+//Route::get('/pelabuhan', [\App\Http\Controllers\PelabuhanController::class, 'select'])->name('pelabuhan.pelabuhan1');
+//Route::get('/pelabuhan', [\App\Http\Controllers\PelabuhanController::class, 'pelabuhan2'])->name('pelabuhan2.pelabuhan2');
+Route::get('/jadwal', [\App\Http\Controllers\PelabuhanController::class, 'jadwal'])->name('jadwal.jadwal');
 
 //search
-Route::get('/jadwal', 'PelabuhanController@search')->name('jadwal.search');
+//Route::get('/jadwal', 'PelabuhanController@search')->name('jadwal.search');
+
+Route::get('wizard', function () {
+    return view('default');
+});
+
+//Booking
+Route::get('booking', 'BookingController@index')->name('booking.index');
+Route::post('booking/store', [\App\Http\Controllers\BookingController::class, 'store'])->name('booking.store');
+Route::get('booking/create-step-one', 'BookingController@createStepOne')->name('booking.create.step.one');
+Route::post('booking/create-step-one', 'BookingController@postCreateStepOne')->name('booking.create.step.one.post');
+
+Route::get('booking/step-one', 'BookingController@StepOne')->name('booking.step.one');
+Route::post('booking/step-one', 'BookingController@postStepOne')->name('booking.step.one.post');
+
+Route::get('booking/create-step-two', 'BookingController@createStepTwo')->name('booking.create.step.two');
+Route::post('booking/create-step-two', 'BookingController@postCreateStepTwo')->name('booking.create.step.two.post');
+
+Route::get('booking/create-step-three', 'BookingController@createStepThree')->name('booking.create.step.three');
+Route::post('booking/create-step-three', 'BookingController@postCreateStepThree')->name('booking.create.step.three.post');

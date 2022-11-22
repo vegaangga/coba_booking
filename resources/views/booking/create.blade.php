@@ -10,7 +10,8 @@
                <label class="form-label">Name</label>
                <input name="name" type="text" class="form-control">
             </div>
-            <div class="mb-3">
+            @livewire('dropdowns', ['selectedPelabuhan1' => 1])
+            {{-- <div class="mb-3">
                <label class="form-label">
                   Pelabuhan - 1
                </label>
@@ -30,7 +31,7 @@
                </label>
                <select id="select_jadwal" name="jadwal" data-placeholder="Select" class="custom-select w-100">
                </select>
-            </div>
+            </div> --}}
             <div class="mb-3">
                <label class="form-label">
                   Village
@@ -52,7 +53,50 @@
    </div>
 @endsection
 
-@push('javascript-internal')
+
+@section('scripts')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#country_id').change(function () {
+                var $state = $('#state_id');
+                $.ajax({
+                    url: "{{ route('pelabuhan2.pelabuhan2') }}",
+                    data: {
+                        country_id: $(this).val()
+                    },
+                    success: function (data) {
+                        $state.html('<option value="" selected>Choose state</option>');
+                        $.each(data, function (id, value) {
+                            $state.append('<option value="' + id + '">' + value + '</option>');
+                        });
+                    }
+                });
+                $('#state_id, #city_id').val("");
+                $('#state').removeClass('d-none');
+            });
+            $('#state_id').change(function () {
+                var $city = $('#city_id');
+                $.ajax({
+                    url: "{{ route('jadwal.jadwal') }}",
+                    data: {
+                        state_id: $(this).val()
+                    },
+                    success: function (data) {
+                        $city.html('<option value="" selected>Choose city</option>');
+                        $.each(data, function (id, value) {
+                            $city.append('<option value="' + id + '">' + value + '</option>');
+                        });
+                    }
+                });
+                $('#city').removeClass('d-none');
+            });
+        });
+    </script>
+@endsection
+
+{{-- JS dah fix --}}
+{{-- @push('javascript-internal')
    <script>
       $(document).ready(function() {
 
@@ -124,7 +168,7 @@
                         return {
                            results: $.map(data, function(item) {
                               return {
-                                 text: item.id_trip + +"|"+ "ETA: " + item.ETA +"|" +"ETD: " +item.ETD,
+                                 text: item.id_trip+"|"+item.nama_kapal +"|"+ "ETA: " + item.ETA +"|" +"ETD: " +item.ETD,
                                  id: item.id
                               }
                            })
@@ -134,7 +178,6 @@
                });
             }
          });
-
 
          // $('#select_pelabuhan2').select2({
          //    allowClear: true,
@@ -272,4 +315,4 @@
       });
    </script>
 
-@endpush
+@endpush --}}

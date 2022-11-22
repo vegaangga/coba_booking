@@ -10,6 +10,7 @@ class Barang extends Model
     use HasFactory;
 
     protected $table ='barang';
+    protected $fillable = ['jenis_barang,nama_barang,berat_barang'];
     public function booking()
     {
         return $this->hasOne(Booking::class);
