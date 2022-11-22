@@ -54,23 +54,42 @@ class BookingController extends Controller
         //     dd($th->getMessage());
         // }
         try {
-            dd($request);
+           // dd($request);
 
-            Barang::create([
-                "jenis_barang" => $request->jenis_barang,
-                "nama_barang" => $request->nama_barang,
-                "berat_barang" => $request->berat_barang,
-            ]);
-            $barang = Barang::get()->first();
-            Booking::create([
-                "id_user" => '1',
-                "id_jadwal" => $request->jadwal,
-                "id_container"=> $request->jenis_container,
-                "id_barang" => $barang,
-                "status" => "belum",
-            ]);
+            // Barang::create([
+            //     "jenis_barang" => $request->jenis_barang,
+            //     "nama_barang" => $request->nama_barang,
+            //     "berat_barang" => $request->berat_barang,
+            // ]);
+            //$barang = Barang::get('id')->first();
+            // Booking::create([
+            //     "id_user" => '1',
+            //     "id_jadwal" => $request->jadwal,
+            //     "id_container"=> $request->jenis_container,
+            //     "id_barang" => $barang,
+            //     "status" => "belum",
+            // ]);
             // dd($request);
-            return redirect()->route('stores.index');
+            $this->validate($request, [
+                'jenis_barang' => 'required',
+                'nama_barang' => 'required|string',
+                'berat_barang' => 'required|integer',
+            ]);
+            $barang = DB::table('barang')->pluck('id')->first();
+            Barang::create([
+                'jenis_barang' => $request->input('jenis_barang'),
+                'nama_barang' =>  $request->input('nama_barang'),
+                'berat_barang' => $request->input('berat_barang'),
+            ]);
+            Booking::create([
+                'id_user' => '1',
+                'id_jadwal' => $request->input('id_jadwal'),
+                'id_container'=> $request->input('jenis_container'),
+                'id_barang' => $barang,
+                'status' => 'belum',
+            ]);
+
+            return back()->with('Yay', 'Booking uccessfully');
         } catch (\Throwable $th) {
             dd($th->getMessage());
         }
