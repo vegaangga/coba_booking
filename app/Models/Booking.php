@@ -9,7 +9,17 @@ class Booking extends Model
 {
     use HasFactory;
     protected $table = 'booking';
-    protected $fillable = ['id_user','id_jadwal','id_barang','id_container','status'];
+    protected $fillable = [
+        'no_resi',
+        'id_user',
+        'id_jadwal',
+        'id_barang',
+        'jenis_container',
+        'id_container',
+        'nama_penerima',
+        'telp_penerima',
+        'alamat_penerima',
+        'status'];
 
     // return $this->belongsTo(Barang::class, 'barang_id', 'id');
 
@@ -29,4 +39,13 @@ class Booking extends Model
     {
         return $this->belongsTo(Barang::class);
     }
+
+    // protected static function boot(){
+    //     parent::boot();
+
+    //     static::created(function ($model) {
+    //       $model->no_resi = "BKG_" . $model->id;
+    //       $model->save();
+    //     });
+    //   }
 }

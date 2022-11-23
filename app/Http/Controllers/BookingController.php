@@ -9,8 +9,11 @@ use App\Models\JenisBarang;
 use App\Models\JenisContainer;
 use App\Models\Pelabuhan;
 use App\Models\User;
+use Illuminate\Support\Carbon;
+use Haruncpi\LaravelIdGenerator\IdGenerator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Helpers\Helper;
 
 class BookingController extends Controller
 {
@@ -75,19 +78,62 @@ class BookingController extends Controller
                 'nama_barang' => 'required|string',
                 'berat_barang' => 'required|integer',
             ]);
-            $barang = DB::table('barang')->pluck('id')->first();
+            $barang = DB::table('barang')->orderByDesc('id')->pluck('id')->first();
+            $id=(int)$barang+1;
+            //no_resi
+            // $no_resi = DB::table('barang')->orderByDesc('no_resi')->pluck('no_resi')->first();
+            // $huruf = 'BKG';
+            // $nomor = (int) substr($no_resi, 3, 3);
+            // $nomor++;
+            // $resi = $huruf . sprintf("%03s", $nomor);
+            // $last_id = Booking::orderBy('BK', 'desc')->first()->BK;
+            // $last_id = $last_id++;
+
+            //$no_resi = IdGenerator::generate(['table' => 'booking', 'length' => 10, 'prefix' =>'CUST-']);
+             /** Generate id */
             Barang::create([
                 'jenis_barang' => $request->input('jenis_barang'),
                 'nama_barang' =>  $request->input('nama_barang'),
                 'berat_barang' => $request->input('berat_barang'),
             ]);
-            Booking::create([
-                'id_user' => '1',
-                'id_jadwal' => $request->input('id_jadwal'),
-                'id_container'=> $request->input('jenis_container'),
-                'id_barang' => $barang,
-                'status' => 'belum',
-            ]);
+            $student_id = Helper::IDGenerator(new Booking, 'no_resi', 2, 'STD');
+
+            $num = Booking::orderBy('no_resi','desc')->count();
+            $dataCode = Booking::orderBy('no_resi','desc')->first();
+            if ($num == 0) {
+                $code = 'BK001';
+            }
+            else{
+                $c = $dataCode->no_resi;
+                $cod = (int) substr($c, 3)+1;
+                $code = "BK00".$cod;
+            }
+            //echo $student_id;
+            // Booking::create([
+            //     'no_resi' => $student_id,
+            //     'id_user' => '1',
+            //     'id_jadwal' => $request->input('id_jadwal'),
+            //     'jenis_container'=> $request->input('jenis_container'),
+            //     'id_container'=> '0',
+            //     'id_barang' => $id,
+            //     'nama_penerima' => $request->input('nama_penerima'),
+            //     'telp_penerima' => $request->input('telp_penerima'),
+            //     'alamat_penerima' => $request->input('alamat_penerima'),
+            //     'status' => 'belum',
+            // ]);
+
+            $q = new Booking();
+            $q->no_resi = $code;
+            $q->id_user = '1';
+            $q->id_jadwal = $request->input('id_jadwal');
+            $q->jenis_container = $request->input('jenis_container');
+            $q->id_container = '1';
+            $q->id_barang = $id;
+            $q->nama_penerima = $request->input('nama_penerima');
+            $q->telp_penerima = $request->input('telp_penerima');
+            $q->alamat_penerima = $request->input('alamat_penerima');;
+            $q->status = '1';
+            $q->save();
 
             return back()->with('Yay', 'Booking uccessfully');
         } catch (\Throwable $th) {

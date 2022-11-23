@@ -35,15 +35,12 @@
                 <label for="description">Berat Barang</label>
                 <p><input type="text" class="form-control" oninput="this.className = ''" id="productAmount" name="berat_barang"/></p>
     </div>
-    {{-- <div class="tab">Birthday:
-      <p><input placeholder="dd" oninput="this.className = ''" name="dd"></p>
-      <p><input placeholder="mm" oninput="this.className = ''" name="nn"></p>
-      <p><input placeholder="yyyy" oninput="this.className = ''" name="yyyy"></p>
+    <div class="tab">Informasi Penerima
+      <p><input placeholder="nama" oninput="this.className = ''" name="nama_penerima"></p>
+      <p><input placeholder="telp" oninput="this.className = ''" name="telp_penerima"></p>
+      <p><input placeholder="alamat" oninput="this.className = ''" name="alamat_penerima"></p>
     </div>
-    <div class="tab">Login Info:
-      <p><input placeholder="Username..." oninput="this.className = ''" name="uname"></p>
-      <p><input placeholder="Password..." oninput="this.className = ''" name="pword" type="password"></p>
-    </div> --}}
+
     <div style="overflow:auto;">
       <div style="float:right;">
         <button type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
