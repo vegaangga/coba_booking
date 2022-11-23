@@ -43,35 +43,7 @@ class BookingController extends Controller
 
     public function store(Request $request)
     {
-        // try {
-        //     Booking::create([
-        //         "name" => $request->name,
-        //         "province_id" => $request->province,
-        //         "regency_id" => $request->regency,
-        //         "district_id" => $request->district,
-        //         "village_id" => $request->village,
-        //         "address" => $request->address,
-        //     ]);
-        //     return redirect()->route('booking.index');
-        // } catch (\Throwable $th) {
-        //     dd($th->getMessage());
-        // }
         try {
-           // dd($request);
-
-            // Barang::create([
-            //     "jenis_barang" => $request->jenis_barang,
-            //     "nama_barang" => $request->nama_barang,
-            //     "berat_barang" => $request->berat_barang,
-            // ]);
-            //$barang = Barang::get('id')->first();
-            // Booking::create([
-            //     "id_user" => '1',
-            //     "id_jadwal" => $request->jadwal,
-            //     "id_container"=> $request->jenis_container,
-            //     "id_barang" => $barang,
-            //     "status" => "belum",
-            // ]);
             // dd($request);
             $this->validate($request, [
                 'jenis_barang' => 'required',
@@ -80,33 +52,25 @@ class BookingController extends Controller
             ]);
             $barang = DB::table('barang')->orderByDesc('id')->pluck('id')->first();
             $id=(int)$barang+1;
-            //no_resi
-            // $no_resi = DB::table('barang')->orderByDesc('no_resi')->pluck('no_resi')->first();
-            // $huruf = 'BKG';
-            // $nomor = (int) substr($no_resi, 3, 3);
-            // $nomor++;
-            // $resi = $huruf . sprintf("%03s", $nomor);
-            // $last_id = Booking::orderBy('BK', 'desc')->first()->BK;
-            // $last_id = $last_id++;
 
-            //$no_resi = IdGenerator::generate(['table' => 'booking', 'length' => 10, 'prefix' =>'CUST-']);
-             /** Generate id */
+            $huruf = 'BKG';
             Barang::create([
                 'jenis_barang' => $request->input('jenis_barang'),
                 'nama_barang' =>  $request->input('nama_barang'),
                 'berat_barang' => $request->input('berat_barang'),
             ]);
-            $student_id = Helper::IDGenerator(new Booking, 'no_resi', 2, 'STD');
 
             $num = Booking::orderBy('no_resi','desc')->count();
             $dataCode = Booking::orderBy('no_resi','desc')->first();
             if ($num == 0) {
-                $code = 'BK001';
+                $resi = 'BKG001';
             }
             else{
                 $c = $dataCode->no_resi;
-                $cod = (int) substr($c, 3)+1;
-                $code = "BK00".$cod;
+                $cod = (int) substr($c, 3);
+                $cod++;
+                $resi = $huruf . sprintf("%03s", $cod);
+                // $code = "BK00".$cod;
             }
             //echo $student_id;
             // Booking::create([
@@ -123,7 +87,7 @@ class BookingController extends Controller
             // ]);
 
             $q = new Booking();
-            $q->no_resi = $code;
+            $q->no_resi = $resi;
             $q->id_user = '1';
             $q->id_jadwal = $request->input('id_jadwal');
             $q->jenis_container = $request->input('jenis_container');
