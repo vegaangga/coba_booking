@@ -17,7 +17,18 @@
    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
    {{-- datatabke --}}
-   <link href="{{ asset('datatables/jquery.dataTables.js') }}" rel="stylesheet">
+   {{-- <link href="{{ asset('datatables/jquery.dataTables.js') }}" rel="stylesheet"> --}}
+   {{-- <script src="https://code.jquery.com/jquery-3.5.1.js" ></script>
+   <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script> --}}
+   {{-- <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap4.min.js"> --}}
+   <script src="https://code.jquery.com/jquery-3.5.1.min.js"
+		integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous">
+	</script>
+
+	<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.22/fc-3.3.2/fh-3.1.7/r-2.2.6/rr-1.2.7/sc-2.0.3/sl-1.3.1/datatables.min.js"></script>
    <title>My store</title>
 </head>
 <style>
@@ -107,11 +118,11 @@
    </div>
    <!-- Jquery -->
    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></scrip>
    <!-- Bootstrap Bundle with Popper -->
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
-   </script>
+   </scrip>
    <!-- Select2 -->
    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
    {{-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> --}}
