@@ -18,7 +18,7 @@
             </div>
             <div class="mb-3">
                <label class="form-label">Jadwal</label>
-               <input name="id_jadwal" value="{{ $fjadwal }}" type="text" class="form-control" readonly>
+               <input name="id_jadwal" value="{{ $booking->id_jadwal }}" type="text" class="form-control" readonly>
             </div>
             <input id="id_jadwal" type="hidden" name="id_jadwal" value="{{ old('id_jadwal') }}" required readonly>
                <span class="input-group-btn">
@@ -34,9 +34,13 @@
                   }
                   @endforeach
                } @endforeach --}}
+               <label class="form-label">Jadwal</label>
                <textarea name="address" class="form-control" rows="3">{{ $b[0] -> id }}</textarea>
+               <label class="form-label">Jenis Barang</label>
                <input id="nama_barang" name="nama_barang" value="{{ $b[0] -> jenis_barang }}" required readonly>
+               <label class="form-label">Nama Barang</label>
                <input id="nama_barang" name="nama_barang" value="{{ $b[0] -> nama_barang }}" required readonly>
+               <label class="form-label">Berat Barang</label>
                <input id="nama_barang" name="nama_barang" value="{{ $b[0] -> berat_barang }}" required readonly>
             </div>
             <div class="mb-3">
