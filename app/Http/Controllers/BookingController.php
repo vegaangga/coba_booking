@@ -138,19 +138,14 @@ class BookingController extends Controller
      */
     public function edit($id)
     {
-        // return view('booking.edit', [
-        //     'booking' => $product,
-        //     'pelabuhan1Selected' => $product->pelabuhan,
-        //     'pelabuhan2Selected' => $product->rute,
-        //     'jadwalSelected' => $product->rute,
-        // ]);
-
+        //form booking
         $booking = Booking::find($id);
         $fjadwal = Rute::select('rute.id','rute.id_trip','trip.nama_trip', 'rute.ETA','rute.ETD','kapal.nama_kapal')
                             ->join('trip', 'trip.id', '=', 'rute.id_trip')
                             ->join('kapal', 'kapal.id', '=', 'trip.id_kapal')
                             ->Where('rute.id',$id)
                             ->get();
+        //Menampilkan barang yg sesuai di tabel booking
         $idbarang = DB::table('booking')
                     ->where('id',$id)
                     ->pluck('id_barang');
@@ -158,20 +153,15 @@ class BookingController extends Controller
         $barang = Barang::find($idbarang);
         $b = json_decode($barang);
 
-        //$tjadwal = Rute::all();
-        // $tjadwal = Rute::select('rute.id','pelabuhan.nama_pelabuhan','rute.id_trip','kapal.nama_kapal', 'rute.ETA','rute.ETD','kapal.nama_kapal')
-        // ->join('trip', 'trip.id', '=', 'rute.id_trip')
-        // ->join('kapal', 'kapal.id', '=', 'trip.id_kapal')
-        // ->join('pelabuhan','pelabuhan.kode_pelabuhan','=','rute.asal_pelabuhan_id')
-        // ->join('pelabuhan','pelabuhan.kode_pelabuhan','=','rute.tujuan_pelabuhan_id')
-        // ->get();
-        $tjadwal = DB::table('rute')
-            ->join('trip', 'trip.id', '=', 'rute.id_trip')// joining the contacts table , where user_id and contact_user_id are same
+        //modal tabel jadwal
+        $tjadwal = Rute::join('trip', 'trip.id', '=', 'rute.id_trip')// joining the contacts table , where user_id and contact_user_id are same
             ->join('kapal', 'kapal.id', '=', 'trip.id_kapal')
             ->join('pelabuhan','pelabuhan.kode_pelabuhan','=','rute.asal_pelabuhan_id')
-            //->join('pelabuhan','pelabuhan.kode_pelabuhan','=','rute.tujuan_pelabuhan_id')
-            ->select('rute.*','pelabuhan.nama_pelabuhan','pelabuhan.nama_pelabuhan','rute.id_trip','kapal.nama_kapal', 'rute.ETA','rute.ETD','kapal.nama_kapal')
+            ->join('pelabuhan as p','p.kode_pelabuhan','=','rute.tujuan_pelabuhan_id')
+            ->join('container','container.kode_kapal','=','kapal.id')
+            ->select('rute.*','rute.id_trip','kapal.nama_kapal', 'rute.ETA','rute.ETD','kapal.nama_kapal','container.kode_container','container.kapasitas_berat')
             ->get();
+
         return view('booking.edit', compact('booking','tjadwal','fjadwal','b'));
     }
 

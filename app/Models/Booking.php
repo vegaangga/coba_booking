@@ -39,7 +39,6 @@ class Booking extends Model
     {
         return $this->belongsTo(Barang::class);
     }
-
     // protected static function boot(){
     //     parent::boot();
 
