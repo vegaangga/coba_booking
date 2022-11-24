@@ -17,11 +17,6 @@
     </div>
     <div class="tab">Detail Barang
             <label for="position-option">Jenis Container</label>
-            <select class="form-control" id="jenis_container" name="jenis_container">
-               @foreach ($jc as $jeniscontainer)
-                  <option value="{{ $jeniscontainer->id }}">{{ $jeniscontainer->jenis_container }}</option>
-               @endforeach
-            </select>
             <label for="position-option">Jenis Barang</label>
             <select class="form-control" id="jenis_barang" name="jenis_barang">
                @foreach ($jb as $jenisbarang)

@@ -27,7 +27,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($products as $product)
+                        @foreach($bookings as $product)
                             <tr>
                                 <th scope="row">{{$product->id}}</th>
                                 <td>{{$product->id_user}}</td>
