@@ -18,7 +18,32 @@
             </div>
             <div class="mb-3">
                <label class="form-label">Jadwal</label>
-               <input name="id_jadwal" value="{{ $booking->id_jadwal }}" type="text" class="form-control" readonly>
+               <table id="lookup" class="table table-bordered table-hover table-striped">
+                <thead>
+                    <tr>
+                        <th>ID Jadwal</th>
+                        <th>Asal</th>
+                        <th>Tujuan</th>
+                        <th>ETA</th>
+                        <th>ETD</th>
+                        <th>Nama Kapal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($jadwal as $data)
+                    <tr>
+                     <td>{{$data->id_jadwal}}</td>
+                     <td>{{$data->asal}}</td>
+                     <td>{{$data->tujuan}}</td>
+                     <td>{{$data->ETA}}</td>
+                     <td>{{$data->ETD}}</td>
+                     <td>{{$data->nama_kapal}}</td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+
+               {{-- <input name="id_jadwal" value="{{ $jadwal_decode }}" type="text" class="form-control" readonly> --}}
             </div>
             <input id="id_jadwal" type="hidden" name="id_jadwal" value="{{ old('id_jadwal') }}" required readonly>
                <span class="input-group-btn">
@@ -29,13 +54,13 @@
                   Detail Barang
                </label>
                <label class="form-label">Jadwal</label>
-               <textarea name="address" class="form-control" rows="3">{{ $b[0] -> id }}</textarea>
+               <textarea name="address" class="form-control" rows="3">{{ $barang->id }}</textarea>
                <label class="form-label">Jenis Barang</label>
-               <input id="nama_barang" name="nama_barang" value="{{ $b[0] -> jenis_barang }}" required readonly>
+               <input id="nama_barang" name="nama_barang" value="{{ $barang->jenis_barang }}" required readonly>
                <label class="form-label">Nama Barang</label>
-               <input id="nama_barang" name="nama_barang" value="{{ $b[0] -> nama_barang }}" required readonly>
+               <input id="nama_barang" name="nama_barang" value="{{ $barang->nama_barang }}" required readonly>
                <label class="form-label">Berat Barang</label>
-               <input id="nama_barang" name="nama_barang" value="{{ $b[0] -> berat_barang }}" required readonly>
+               <input id="nama_barang" name="nama_barang" value="{{ $barang->berat_barang }}" required readonly>
             </div>
             <div class="mb-3">
                <label class="form-label">

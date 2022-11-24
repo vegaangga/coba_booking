@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Rute;
 
 class Booking extends Model
 {
@@ -39,6 +40,11 @@ class Booking extends Model
     {
         return $this->belongsTo(Barang::class);
     }
+    public function rute()
+    {
+        return $this->belongsTo(Rute::class, 'id_jadwal');
+    }
+
     // protected static function boot(){
     //     parent::boot();
 

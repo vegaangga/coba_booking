@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Trip;
+use App\Models\Booking;
 
 class Kapal extends Model
 {
@@ -19,5 +21,9 @@ class Kapal extends Model
     public function booking()
     {
         return $this->hasOne(Booking::class);
+    }
+    public function trip()
+    {
+        return $this->hasMany(Trip::class);
     }
 }
