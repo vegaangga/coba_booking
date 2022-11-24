@@ -151,12 +151,37 @@ class BookingController extends Controller
                             ->join('kapal', 'kapal.id', '=', 'trip.id_kapal')
                             ->Where('rute.id',$id)
                             ->get();
-        $idbarang = DB::table('booking')
-                    ->where('id',$id)
-                    ->pluck('id_barang');
+        // $idbarang = DB::table('booking')
+        //             ->where('id',$id)
+        //             ->pluck('id_barang');
+
+        foreach ($booking as $key => $book) {
+            $idbarang = $booking->id_barang;
+            $idjadwal = $booking->id_jadwal;
+        }
 
         $barang = Barang::find($idbarang);
-        $b = json_decode($barang);
+        //$b = json_decode($barang);
+
+        // $jadwal = DB::table('booking')->join('rute', $idjadwal, '=', 'rute.id')
+        // ->join('trip', 'rute.id_trip', '=', 'trip.id')
+        // ->join('kapal', 'trip.id_kapal', '=', 'kapal.id');
+
+        // $jadwal = DB::table('kapal')->join('trip', 'kapal.id', '=', 'trip.id_kapal')
+        // ->join('rute', 'trip.id', '=', 'rute.id_trip')
+        // ->join('booking', 'rute.id', '=', $idjadwal)->get();
+
+        $jadwal = DB::table('kapal')->join('trip', 'kapal.id', '=', 'trip.id_kapal')
+        ->join('rute', 'trip.id', '=', 'rute.id_trip')
+        ->join('booking', 'rute.id', '=', 'booking.id_jadwal')
+        ->join('pelabuhan as p', 'rute.asal_pelabuhan_id', '=', 'p.kode_pelabuhan')
+        ->join('pelabuhan as p2', 'rute.tujuan_pelabuhan_id', '=', 'p2.kode_pelabuhan')
+        ->select('booking.id_jadwal', 'p.nama_pelabuhan as asal', 'p2.nama_pelabuhan as tujuan', 'rute.ETA', 'rute.ETD', 'kapal.nama_kapal')
+        ->where('booking.id_jadwal', '=', $idjadwal)
+        ->where('booking.id', '=', $id)->get();
+
+        $jadwal_decode=print_r($jadwal, true);
+
 
         //$tjadwal = Rute::all();
         // $tjadwal = Rute::select('rute.id','pelabuhan.nama_pelabuhan','rute.id_trip','kapal.nama_kapal', 'rute.ETA','rute.ETD','kapal.nama_kapal')
@@ -172,7 +197,8 @@ class BookingController extends Controller
             //->join('pelabuhan','pelabuhan.kode_pelabuhan','=','rute.tujuan_pelabuhan_id')
             ->select('rute.*','pelabuhan.nama_pelabuhan','pelabuhan.nama_pelabuhan','rute.id_trip','kapal.nama_kapal', 'rute.ETA','rute.ETD','kapal.nama_kapal')
             ->get();
-        return view('booking.edit', compact('booking','tjadwal','fjadwal','b'));
+        return view('booking.edit', compact('booking','tjadwal','fjadwal','barang', 'jadwal', 'jadwal_decode'));
+        // return $jadwal;
     }
 
     /**
