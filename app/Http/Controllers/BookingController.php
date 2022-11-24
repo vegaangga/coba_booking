@@ -145,7 +145,6 @@ class BookingController extends Controller
                             ->join('kapal', 'kapal.id', '=', 'trip.id_kapal')
                             ->Where('rute.id',$id)
                             ->get();
-<<<<<<< HEAD
         // $idbarang = DB::table('booking')
         //             ->where('id',$id)
         //             ->pluck('id_barang');
@@ -154,12 +153,6 @@ class BookingController extends Controller
             $idbarang = $booking->id_barang;
             $idjadwal = $booking->id_jadwal;
         }
-=======
-        //Menampilkan barang yg sesuai di tabel booking
-        $idbarang = DB::table('booking')
-                    ->where('id',$id)
-                    ->pluck('id_barang');
->>>>>>> 82a56dfe6905afef8882aac9a6215548ace8f6f2
 
         $barang = Barang::find($idbarang);
         //$b = json_decode($barang);
@@ -192,13 +185,8 @@ class BookingController extends Controller
             ->join('container','container.kode_kapal','=','kapal.id')
             ->select('rute.*','rute.id_trip','kapal.nama_kapal', 'rute.ETA','rute.ETD','kapal.nama_kapal','container.kode_container','container.kapasitas_berat')
             ->get();
-<<<<<<< HEAD
         return view('booking.edit', compact('booking','tjadwal','fjadwal','barang', 'jadwal', 'jadwal_decode'));
         // return $jadwal;
-=======
-
-        return view('booking.edit', compact('booking','tjadwal','fjadwal','b'));
->>>>>>> 82a56dfe6905afef8882aac9a6215548ace8f6f2
     }
 
     /**
