@@ -40,11 +40,14 @@ class Booking extends Model
     {
         return $this->belongsTo(Barang::class);
     }
+<<<<<<< HEAD
     public function rute()
     {
         return $this->belongsTo(Rute::class, 'id_jadwal');
     }
 
+=======
+>>>>>>> 82a56dfe6905afef8882aac9a6215548ace8f6f2
     // protected static function boot(){
     //     parent::boot();
 

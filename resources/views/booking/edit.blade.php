@@ -53,12 +53,6 @@
                <label class="form-label">
                   Detail Barang
                </label>
-               {{-- @foreach($b as $student) {
-                  @foreach($student as $mykey=>$myValue) {
-                     <textarea name="address" class="form-control" rows="3">{{ $b[0] -> id }}</textarea>
-                  }
-                  @endforeach
-               } @endforeach --}}
                <label class="form-label">Jadwal</label>
                <textarea name="address" class="form-control" rows="3">{{ $barang->id }}</textarea>
                <label class="form-label">Jenis Barang</label>
@@ -68,6 +62,26 @@
                <label class="form-label">Berat Barang</label>
                <input id="nama_barang" name="nama_barang" value="{{ $barang->berat_barang }}" required readonly>
             </div>
+            <div class="mb-3">
+               <label class="form-label">
+                  Detail Penerima
+               </label>
+               <label class="form-label">Nama Penerima</label>
+               <textarea name="address" class="form-control" rows="3">{{ $booking->nama_penerima }}</textarea>
+               <label class="form-label">Jenis Barang</label>
+               <input id="nama_barang" name="nama_barang" value="{{ $booking->telp_penerima }}" required readonly>
+               <label class="form-label">Nama Barang</label>
+               <input id="nama_barang" name="nama_barang" value="{{ $booking->alamat_penerima }}" required readonly>
+            </div>
+            <label class="form-label">
+              Status Booking
+            </label>
+            <select class="form-control" id="status" name="status">
+               <option value="belum">Belum</option>
+               <option value="terima">Terima</option>
+               <option value="reschedule">Reschedule</option>
+               <option value="tolak">Tolak</option>
+            </select>
             <div class="mb-3">
                <button class="btn btn-primary" type="submit">Update</button>
             </div>
@@ -105,17 +119,17 @@
                    </thead>
                    <tbody>
                        @foreach($tjadwal as $data)
-                       <tr class="pilih" data-user_id="<?php echo $data->id; ?>" data-user_nisn="<?php echo $data->id_trip; ?>" data-user_email="<?php echo $data->id; ?>" data-user_name="<?php echo $data->id; ?>" >
+                       <tr class="pilih" data-id_jadwal="<?php echo $data->id; ?>">
                         <td>{{$data->id}}</td>
                         <td>{{$data->id_trip}}</td>
                            <td>
-                               {{$data->nama_pelabuhan}}
+                               {{$data->awal->nama_pelabuhan}}
                            </td>
-                           <td>{{$data->nama_pelabuhan}}</td>
+                           <td>{{$data->tujuan->nama_pelabuhan}}</td>
                            <td>{{$data->nama_kapal}}</td>
-                           <td>{{$data->tujuan_pelabuhan_id}}</td>
+                           <td>{{$data->kode_container}}</td>
                            {{-- <td>{{$data->tujuan_pelabuhan_id}}</td> --}}
-                           <td>{{$data->tujuan_pelabuhan_id}}</td>
+                           <td>{{$data->kapasitas_berat}}</td>
                            <td>{{$data->ETA}}</td>
                            <td>{{$data->ETD}}</td>
                        </tr>
@@ -138,13 +152,9 @@ $(document).ready(function(){
   });
 });
    $(document).on('click', '.pilih', function (e) {
-                document.getElementById("user_name").value = $(this).attr('data-user_name');
-                document.getElementById("id_jadwal").value = $(this).attr('data-id');
-                document.getElementById("user_email").value = $(this).attr('data-user_email');
-                document.getElementById("user_nisn").value = $(this).attr('data-user_nisn');
+                document.getElementById("id_jadwal").value = $(this).attr('data-id_jadwal');
                 $('#myModal').modal('hide');
             });
-
 
              $(function () {
                 $("#lookup").dataTable();
